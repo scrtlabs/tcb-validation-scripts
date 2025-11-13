@@ -12,6 +12,13 @@ Before running the verification scripts, ensure you have sudo/root access to the
 
 ---
 
+## Clone the repo
+
+```bash
+git clone git@github.com:scrtlabs/scrtlabs-validators.git
+cd scrtlabs-validators
+```
+
 ## Script Execution Order
 
 ### Step 1: Install Required Tools
@@ -21,7 +28,7 @@ Before running the verification scripts, ensure you have sudo/root access to the
 **Purpose:** Installs necessary diagnostic tools and performs basic system checks
 
 ```bash
-sudo ./scripts/preflight.sh
+sudo ./preflight.sh
 ```
 
 **What it does:**
@@ -41,7 +48,7 @@ sudo ./scripts/preflight.sh
 **Purpose:** Quickly determines your current TCB level and provides upgrade recommendations
 
 ```bash
-./scripts/verification.sh
+./verification.sh
 ```
 
 **What it does:**
@@ -64,7 +71,7 @@ sudo ./scripts/preflight.sh
 **Purpose:** Comprehensive check for TCB-R 18 compliance
 
 ```bash
-sudo ./scripts/verify-system.sh
+sudo ./verify-system.sh
 ```
 
 **What it does:**
@@ -88,7 +95,7 @@ sudo ./scripts/verify-system.sh
 **Purpose:** Detailed diagnostic report for troubleshooting TDX issues
 
 ```bash
-sudo ./scripts/diagnose-tdx.sh
+sudo ./diagnose-tdx.sh
 ```
 
 **What it does:**
@@ -125,7 +132,7 @@ sudo ./scripts/diagnose-tdx.sh
 **Purpose:** Final verification for TCB-R 20 compliance
 
 ```bash
-sudo ./scripts/verify-tcb-v20.sh
+sudo ./verify-tcb-v20.sh
 ```
 
 **What it does:**
@@ -148,23 +155,23 @@ sudo ./scripts/verify-tcb-v20.sh
 
 ```bash
 # 1. Install tools (first time only)
-sudo ./scripts/preflight.sh
+sudo ./preflight.sh
 
 # 2. Quick check
-./scripts/verification.sh
+./verification.sh
 
 # 3. Comprehensive verification
-sudo ./scripts/verify-system.sh
+sudo ./verify-system.sh
 
 # 4. If targeting TCB-R 20
-sudo ./scripts/verify-tcb-v20.sh
+sudo ./verify-tcb-v20.sh
 ```
 
 ### For Troubleshooting TDX Issues:
 
 ```bash
 # If verify-system.sh shows unexpected results
-sudo ./scripts/diagnose-tdx.sh > tdx-diagnostic-report.txt
+sudo ./diagnose-tdx.sh > tdx-diagnostic-report.txt
 
 # Save the output and compare with a working server
 # or share with support for analysis
@@ -214,7 +221,7 @@ sudo ./scripts/diagnose-tdx.sh > tdx-diagnostic-report.txt
 - Run `verify-system.sh` for detailed TCB-R 18 checks
 - Use `diagnose-tdx.sh` when you need to troubleshoot or when `verify-system.sh` doesn't give expected results
 - Run `verify-tcb-v20.sh` to confirm TCB-R 20 compliance
-- Save diagnostic output for comparison or support: `sudo ./scripts/diagnose-tdx.sh > diagnostic-$(date +%Y%m%d).txt`
+- Save diagnostic output for comparison or support: `sudo ./diagnose-tdx.sh > diagnostic-$(date +%Y%m%d).txt`
 
 ---
 
