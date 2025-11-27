@@ -15,8 +15,8 @@ Before running the verification scripts, ensure you have sudo/root access to the
 ## Clone the repo
 
 ```bash
-git clone git@github.com:scrtlabs/scrtlabs-validators.git
-cd scrtlabs-validators
+git clone git@github.com:scrtlabs/tcb-validation-scripts.git
+cd tcb-validation-scripts
 ```
 
 ## Script Execution Order
