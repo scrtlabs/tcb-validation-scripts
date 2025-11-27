@@ -12,11 +12,13 @@ Before running the verification scripts, ensure you have sudo/root access to the
 
 ---
 
-## Clone the repo
+## Clone the repo, make scripts executable
 
 ```bash
 git clone git@github.com:scrtlabs/tcb-validation-scripts.git
 cd tcb-validation-scripts
+
+sudo chmod +x *.sh
 ```
 
 ## Script Execution Order
