@@ -1,8 +1,12 @@
 #!/bin/bash
 
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+. "$SCRIPT_DIR/lib-tcb.sh"
+
 echo "=========================================="
 echo "  TDX Failure Diagnostic Report"
 echo "  Generated: $(date)"
+echo "  Policy:    $(policy_version 2>/dev/null || echo unknown)"
 echo "=========================================="
 echo ""
 
@@ -18,24 +22,31 @@ echo ""
 
 # CPU Info
 echo "=== CPU INFORMATION ==="
-CPUID_FAMILY=$(cpuid -1 -r 2>/dev/null | grep "0x00000001" | awk '{print $5}' | cut -d'=' -f2)
-CPUID_MODEL=$(cpuid -1 -r 2>/dev/null | grep "0x00000001" | awk '{print $6}' | cut -d'=' -f2)
-CPUID_STEPPING=$(cpuid -1 -r 2>/dev/null | grep "0x00000001" | awk '{print $7}' | cut -d'=' -f2)
-echo "CPUID Family: $CPUID_FAMILY"
-echo "CPUID Model: $CPUID_MODEL"
-echo "CPUID Stepping: $CPUID_STEPPING"
-echo "CPU: $(grep -m1 'model name' /proc/cpuinfo | cut -d: -f2 | xargs)"
+SIG=$(get_cpu_signature 2>/dev/null || echo "unknown")
+echo "CPUID Signature (family-model-stepping): $SIG"
+echo "CPU: $(get_cpu_model_name)"
+if command -v jq >/dev/null 2>&1; then
+    CPU_NAME=$(policy_field "$SIG" name)
+    [ -n "$CPU_NAME" ] && echo "Matched policy entry: $CPU_NAME"
+fi
 echo ""
 
 # Microcode
 echo "=== MICROCODE ==="
-MCU=$(grep microcode /proc/cpuinfo | head -1 | awk '{print $3}')
+MCU=$(get_current_microcode)
 echo "Current: $MCU"
-echo "TCB-R 20 Required: 0x210002B3"
-if [[ "$MCU" < "0x210002b3" ]]; then
-    echo "Status: ❌ TOO OLD - This could prevent TDX"
-else
-    echo "Status: ✅ OK"
+if command -v jq >/dev/null 2>&1; then
+    MIN=$(policy_field "$SIG" min_microcode)
+    if [ -n "$MIN" ]; then
+        echo "Required (current TCB policy): $MIN ($(policy_field "$SIG" min_microcode_release))"
+        if [ "$(hex_cmp "$MCU" "$MIN")" -lt 0 ]; then
+            echo "Status: ❌ TOO OLD"
+        else
+            echo "Status: ✅ OK"
+        fi
+    else
+        echo "Status: ⚠️  No policy entry for this CPU ($SIG)"
+    fi
 fi
 echo ""
 

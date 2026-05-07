@@ -1,0 +1,133 @@
+{
+  "policy_version": "2026-02-10",
+  "generated": "Reflects Intel TDX TCB Recovery Attestation guidance through IPU 2026.1 / TCB-R 21.",
+  "sources": {
+    "tcb_recovery_attestation": "https://www.intel.com/content/www/us/en/developer/topic-technology/software-security-guidance/trusted-computing-base-recovery-attestation.html",
+    "tcb_recovery_overview": "https://www.intel.com/content/www/us/en/developer/articles/technical/software-security-guidance/best-practices/trusted-computing-base-recovery.html",
+    "tdx_enabling_tcb_recoveries": "https://cc-enabling.trustedservices.intel.com/intel-tdx-enabling-guide/02/tcb_recoveries/",
+    "intel_microcode": "https://github.com/intel/Intel-Linux-Processor-Microcode-Data-Files/releases",
+    "tdx_module": "https://github.com/intel/confidential-computing.tdx.tdx-module/releases",
+    "trust_authority_tcb_policy": "https://docs.trustauthority.intel.com/main/articles/articles/ita/concept-platform-tcb.html"
+  },
+  "common": {
+    "min_dcap": "1.24",
+    "dcap_release_url": "https://github.com/intel/SGXDataCenterAttestationPrimitives/releases",
+    "kernel_params_required": ["kvm_intel.tdx=1", "intel_iommu=on"],
+    "kernel_config_required": ["CONFIG_INTEL_TDX_HOST=y"],
+    "common_advisories": [
+      {
+        "id": "INTEL-SA-01311",
+        "title": "Intel Xeon 6 Processor with Intel TDX Advisory",
+        "url": "https://www.intel.com/content/www/us/en/security-center/advisory/intel-sa-01311.html"
+      },
+      {
+        "id": "INTEL-SA-01367",
+        "title": "Intel Xeon 6 Processor Firmware Advisory",
+        "url": "https://www.intel.com/content/www/us/en/security-center/advisory/intel-sa-01367.html"
+      },
+      {
+        "id": "INTEL-SA-01268",
+        "title": "Intel Processor Advisory",
+        "url": "https://www.intel.com/content/www/us/en/security-center/advisory/intel-sa-01268.html"
+      }
+    ]
+  },
+  "cpus": {
+    "06-8f-08": {
+      "name": "Sapphire Rapids (SPR-SP)",
+      "codename": "Sapphire Rapids",
+      "generation": "4th Gen Intel Xeon Scalable",
+      "tdx_supported": true,
+      "min_microcode": "0x2b000650",
+      "min_microcode_release": "microcode-20251111",
+      "min_microcode_url": "https://github.com/intel/Intel-Linux-Processor-Microcode-Data-Files/releases/tag/microcode-20251111",
+      "tdx_module_series": "1.5",
+      "min_tdx_module_version": "1.5.24",
+      "min_tdx_module_build": 943,
+      "min_tdx_module_build_date": "2025-07-29",
+      "tdx_module_url": "https://github.com/intel/confidential-computing.tdx.tdx-module/releases/tag/TDX_MODULE_1.5.24",
+      "min_seamldr_version": "2.0.00",
+      "min_bios_ipu": "IPU 2025.3 (August 2025) or later"
+    },
+    "06-8f-07": {
+      "name": "Sapphire Rapids (SPR-SP, stepping 7)",
+      "codename": "Sapphire Rapids",
+      "generation": "4th Gen Intel Xeon Scalable",
+      "tdx_supported": true,
+      "min_microcode": "0x2b000650",
+      "min_microcode_release": "microcode-20251111",
+      "min_microcode_url": "https://github.com/intel/Intel-Linux-Processor-Microcode-Data-Files/releases/tag/microcode-20251111",
+      "tdx_module_series": "1.5",
+      "min_tdx_module_version": "1.5.24",
+      "min_tdx_module_build": 943,
+      "min_tdx_module_build_date": "2025-07-29",
+      "tdx_module_url": "https://github.com/intel/confidential-computing.tdx.tdx-module/releases/tag/TDX_MODULE_1.5.24",
+      "min_seamldr_version": "2.0.00",
+      "min_bios_ipu": "IPU 2025.3 (August 2025) or later"
+    },
+    "06-cf-02": {
+      "name": "Emerald Rapids (EMR-SP)",
+      "codename": "Emerald Rapids",
+      "generation": "5th Gen Intel Xeon Scalable",
+      "tdx_supported": true,
+      "min_microcode": "0x210002d3",
+      "min_microcode_release": "microcode-20260210",
+      "min_microcode_url": "https://github.com/intel/Intel-Linux-Processor-Microcode-Data-Files/releases/tag/microcode-20260210",
+      "tdx_module_series": "1.5",
+      "min_tdx_module_version": "1.5.24",
+      "min_tdx_module_build": 943,
+      "min_tdx_module_build_date": "2025-07-29",
+      "tdx_module_url": "https://github.com/intel/confidential-computing.tdx.tdx-module/releases/tag/TDX_MODULE_1.5.24",
+      "min_seamldr_version": "2.0.00",
+      "min_bios_ipu": "IPU 2026.1 (February 2026) or later"
+    },
+    "06-ad-01": {
+      "name": "Granite Rapids AP/SP (GNR)",
+      "codename": "Granite Rapids",
+      "generation": "Intel Xeon 6 (P-cores)",
+      "tdx_supported": true,
+      "min_microcode": "0x01000405",
+      "min_microcode_release": "microcode-20260210",
+      "min_microcode_url": "https://github.com/intel/Intel-Linux-Processor-Microcode-Data-Files/releases/tag/microcode-20260210",
+      "tdx_module_series": "2.0",
+      "min_tdx_module_version": "2.0.14",
+      "min_tdx_module_build": 947,
+      "min_tdx_module_build_date": "2026-04-25",
+      "tdx_module_url": "https://github.com/intel/confidential-computing.tdx.tdx-module/releases/tag/TDX_MODULE_2.0.14",
+      "min_seamldr_version": "2.0.00",
+      "min_bios_ipu": "IPU 2026.1 (February 2026) or later"
+    },
+    "06-ae-01": {
+      "name": "Granite Rapids-D (GNR-D)",
+      "codename": "Granite Rapids-D",
+      "generation": "Intel Xeon 6 (P-cores, networking/edge)",
+      "tdx_supported": true,
+      "min_microcode": "0x01000303",
+      "min_microcode_release": "microcode-20260227",
+      "min_microcode_url": "https://github.com/intel/Intel-Linux-Processor-Microcode-Data-Files/releases/tag/microcode-20260227",
+      "tdx_module_series": "2.0",
+      "min_tdx_module_version": "2.0.14",
+      "min_tdx_module_build": 947,
+      "min_tdx_module_build_date": "2026-04-25",
+      "tdx_module_url": "https://github.com/intel/confidential-computing.tdx.tdx-module/releases/tag/TDX_MODULE_2.0.14",
+      "min_seamldr_version": "2.0.00",
+      "min_bios_ipu": "IPU 2026.1 (February 2026) or later"
+    },
+    "06-af-03": {
+      "name": "Sierra Forest (SRF-AP/SP)",
+      "codename": "Sierra Forest",
+      "generation": "Intel Xeon 6 (E-cores)",
+      "tdx_supported": true,
+      "min_microcode": "0x03000382",
+      "min_microcode_release": "microcode-20251111",
+      "min_microcode_url": "https://github.com/intel/Intel-Linux-Processor-Microcode-Data-Files/releases/tag/microcode-20251111",
+      "tdx_module_series": "1.5",
+      "min_tdx_module_version": "1.5.25",
+      "min_tdx_module_build": 954,
+      "min_tdx_module_build_date": "2025-09-02",
+      "tdx_module_url": "https://github.com/intel/confidential-computing.tdx.tdx-module/releases/tag/TDX_MODULE_1.5.25",
+      "min_seamldr_version": "2.0.00",
+      "min_bios_ipu": "IPU 2026.1 (February 2026) or later"
+    }
+  }
+}
